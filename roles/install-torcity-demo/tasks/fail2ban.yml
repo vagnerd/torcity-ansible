@@ -6,16 +6,13 @@
 
 - name: CONFIGURE FILTER OF FAIL2BAN
   copy:
-    src: fail2ban/filter.torcity-demo
+    src: fail2ban/filter.torcity-demo.conf
     dest: /etc/fail2ban/filter.d/torcity-demo.conf
 
 - name: CONFIGURE ACTION ON FAIL2BAN
   copy:
     src: fail2ban/action.iptables.conf
     dest: /etc/fail2ban/action.d/iptables-multiport.conf
-
-- name: TEMPLATE MONGODB CONFIG 
-  template
 
 - name: CONFIGURE JAIL OF FAIL2BAN
   template:
