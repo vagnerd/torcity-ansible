@@ -1,0 +1,12 @@
+---
+- name: COPY initRS SCRIPT
+  template: src=initRS.j2 dest=/tmp/initRS.js
+
+- name: INITIATE RS FROM MASTER
+  shell: mongo < /tmp/initRS.js
+
+- name: COPY WAIT MASTER SCRIPT 
+  template: src=master.j2 dest=/tmp/master.js
+
+- name: WAIT MASTER SERVER
+  shell: mongo < /tmp/master.js

@@ -1,0 +1,6 @@
+---
+- name: COPY ADD-MEMBERS SCRIPT 
+  template: src=addMembers.j2 dest=/tmp/addMembers.js
+
+- name: ADD MEMBERS ON REPLICA SET ON MONGODB 
+  shell: mongo < /tmp/addMembers.js
