@@ -24,3 +24,6 @@
     name: fail2ban
     state: restarted
     enabled: true
+
+- name: CREATE ALIAS UNBAN COMMDAND
+  shell: echo "alias torcity-demo-unban='fail2ban-client set torcity-demo unbanip '" >> ~/.bash_aliases
