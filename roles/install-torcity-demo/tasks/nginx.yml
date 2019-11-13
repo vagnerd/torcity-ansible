@@ -1,0 +1,21 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: setup nginx server
+# Requirements: 
+#
+
+- name: CONFIGURE NGINX SERVER
+  copy:
+    src: nginx/vhost-default.conf
+    dest: /etc/nginx/sites-enabled/default
+
+- name: CONFIGURE BAN PAGE
+  copy:
+    src: nginx/index.html
+    dest: /var/www/html/index.html
+
+- name: RESTART NGINX 
+  service:
+    name: nginx
+    state: restarted
+    enabled: true

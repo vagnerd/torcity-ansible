@@ -1,10 +1,10 @@
 ---
 # Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
-# Description: Install multitor dependencies 
+# Description: Install torcity-demo dependencies 
 # Requirements: 
 #
 
-- name: INSTALL MULTITOR PACKAGES DEPENDENCIES 
+- name: INSTALL TORCITY-DEMO PACKAGES DEPENDENCIES 
   apt:
     update_cache: yes
     pkg:

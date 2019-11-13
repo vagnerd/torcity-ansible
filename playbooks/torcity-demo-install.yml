@@ -1,0 +1,10 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: install and configure torcity-demo (multitor) product 
+#
+
+# INSTALL TORCITY DEMO PRODUCT 
+- hosts: all
+  become: yes
+  roles:
+    - role: install-torcity-demo

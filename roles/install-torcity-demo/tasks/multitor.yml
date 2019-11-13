@@ -1,0 +1,35 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: Install multitor project 
+# Requirements: 
+#
+
+- name: GIT CLONE MULTITOR SOURCE PROJECT
+  git:
+    repo: 'https://github.com/trimstray/multitor.git'
+    dest: /opt/multitor
+    force: yes
+
+- name: EXECUTE SETUP MULTITOR SCRIPT
+  command: /opt/multitor/setup.sh install
+
+- name: COPY PRIVOXY TEMPLATE SERVER
+  copy:
+    src: multitor/privoxy-template.cfg
+    dest: /opt/multitor/templates/privoxy-template.cfg
+
+- name: SET SYSCTL TO ALLOW LOCAL ROUTING
+  sysctl:
+    name: net.ipv4.conf.all.route_localnet
+    value: 1
+    reload: yes
+    state: present
+
+- name: LOAD IPTABLES DNAT PORT 8080
+  iptables:
+    table: nat
+    chain: PREROUTING
+    protocol: tcp
+    destination_port: 8080
+    jump: DNAT
+    to_destination: 127.0.0.1:15379

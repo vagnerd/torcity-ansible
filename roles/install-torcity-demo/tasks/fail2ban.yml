@@ -1,0 +1,26 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: setup fail2ban
+# Requirements: 
+#
+
+- name: CONFIGURE FILTER OF FAIL2BAN
+  copy:
+    src: fail2ban/filter.torcity-demo
+    dest: /etc/fail2ban/filter.d/torcity-demo.conf
+
+- name: CONFIGURE ACTION ON FAIL2BAN
+  copy:
+    src: fail2ban/action.iptables.conf
+    dest: /etc/fail2ban/action.d/iptables-multiport.conf
+
+- name: CONFIGURE JAIL OF FAIL2BAN
+  copy:
+    src: fail2ban/jail.conf
+    dest: /etc/fail2ban/jail.conf
+
+- name: RESTART FAIL2BAN
+  service:
+    name: fail2ban
+    state: restarted
+    enabled: true
