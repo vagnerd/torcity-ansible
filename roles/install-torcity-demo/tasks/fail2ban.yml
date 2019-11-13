@@ -14,9 +14,12 @@
     src: fail2ban/action.iptables.conf
     dest: /etc/fail2ban/action.d/iptables-multiport.conf
 
+- name: TEMPLATE MONGODB CONFIG 
+  template
+
 - name: CONFIGURE JAIL OF FAIL2BAN
-  copy:
-    src: fail2ban/jail.conf
+  template:
+    src: fail2ban/jail.conf.j2
     dest: /etc/fail2ban/jail.conf
 
 - name: RESTART FAIL2BAN

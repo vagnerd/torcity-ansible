@@ -24,14 +24,14 @@ ignoreip = 127.0.0.1/8
 ignorecommand =
 
 # "bantime" is the number of seconds that a host is banned.
-bantime  = 600
+bantime  = {{ fail2ban_bantime }}
 
 # A host is banned if it has generated "maxretry" during the last "findtime"
 # seconds.
-findtime  = 600
+findtime  = {{ fail2ban_findtime }}
 
 # "maxretry" is the number of failures before a host get banned.
-maxretry = 20
+maxretry = {{ fail2ban_maxretry }}
 
 # "backend" specifies the backend used to get files modification.
 # Available options are "pyinotify", "gamin", "polling", "systemd" and "auto".
@@ -190,8 +190,8 @@ enable   = true
 filter   = torcity-demo
 port     = 15379
 logpath  = /var/log/privoxy/logfile
-bantime  = 1200
-maxretry = 15
+bantime  = {{ fail2ban_bantime }}
+maxretry = {{ fail2ban_maxretry }}
 
 
 
