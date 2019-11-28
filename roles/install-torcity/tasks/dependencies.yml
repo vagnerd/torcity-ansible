@@ -1,0 +1,36 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: Install torcity-demo dependencies 
+# Requirements: 
+#
+
+- name: INSTALL TORCITY-DEMO PACKAGES DEPENDENCIES 
+  apt:
+    update_cache: yes
+    pkg:
+     - git
+     - haproxy 
+     - polipo 
+     - tor
+     - privoxy
+     - npm
+     - pptpd
+    state: present
+
+- name: INSTALL NPM HPTS SERVER
+  npm:
+    name: http-proxy-to-socks
+    global: yes
+
+- name: DISABLE POLIPO/PRIVOXY/HAPROXY/TOR SERVICE 
+  vars:
+    services_list:
+    - "polipo"
+    - "privoxy"
+    - "haproxy"
+    - "tor"
+  service:
+    name: "{{ item }}" 
+    enabled: no
+    state: stopped
+  with_items: "{{ services_list }}"

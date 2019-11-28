@@ -1,0 +1,14 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: install/setup torcity-demo and dependencies 
+# Requirements: 
+#
+
+- name: INSTALL DEPENDENCIES 
+  include_tasks: dependencies.yml
+
+- name: INSTALL/SETUP MULTITOR
+  include_tasks: multitor.yml
+
+- name: SETUP PPTP SERVER
+  include_tasks: pptpd.yml
