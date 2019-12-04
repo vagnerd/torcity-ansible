@@ -1,6 +1,6 @@
 ---
 # Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
-# Description: Install multitor project 
+# Description: Install and start multitor project 
 # Requirements: 
 #
 
@@ -12,22 +12,6 @@
 
 - name: EXECUTE SETUP MULTITOR SCRIPT
   command: /opt/multitor/setup.sh install
-
-- name: SET SYSCTL TO ALLOW LOCAL ROUTING
-  sysctl:
-    name: net.ipv4.conf.all.route_localnet
-    value: 1
-    reload: yes
-    state: present
-
-- name: LOAD IPTABLES DNAT PORT 8080
-  iptables:
-    table: nat
-    chain: PREROUTING
-    protocol: tcp
-    destination_port: 8080
-    jump: DNAT
-    to_destination: 127.0.0.1:15379
 
 - name: START MULTITOR
   shell: multitor --init 5 -u debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy

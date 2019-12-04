@@ -28,7 +28,7 @@
     - "polipo"
     - "privoxy"
     - "haproxy"
-    - "tor"
+    - "dnsmasq"
   service:
     name: "{{ item }}" 
     enabled: no

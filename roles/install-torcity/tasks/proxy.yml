@@ -1,0 +1,15 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: Setup proxy (provixy) server 
+# Requirements: 
+#
+
+- name: COPY PRIVOXY CONFIG SERVER
+  copy:
+    src: multitor/privoxy.cfg
+    dest: /opt/multitor/etc/privoxy.cfg
+
+- name: RELOAD PRIVOXY
+  shell: |
+    kill `ps auxw  | grep -i privoxy | awk '{ print $2 }' | head -n1`
+    privoxy /opt/multitor/bin/../etc/privoxy.cfg

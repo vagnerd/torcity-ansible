@@ -1,0 +1,16 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: Setup TOR DNS server 
+# Requirements: 
+#
+
+- name: COPY TOR-DNS CONFIG SERVER
+  copy:
+    src: tor/torrc
+    dest: /etc/tor/torrc
+
+- name: RESTART TOR-DNS SERVER
+  service:
+    name: tor 
+    state: restarted
+    enabled: true

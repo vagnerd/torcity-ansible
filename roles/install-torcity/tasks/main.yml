@@ -1,6 +1,6 @@
 ---
 # Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
-# Description: install/setup torcity-demo and dependencies 
+# Description: install/setup torcity product and dependencies 
 # Requirements: 
 #
 
@@ -10,5 +10,14 @@
 - name: INSTALL/SETUP MULTITOR
   include_tasks: multitor.yml
 
+- name: SETUP TOR-DNS
+  include_tasks: dns.yml
+
 - name: SETUP PPTP SERVER
   include_tasks: pptpd.yml
+
+- name: SETUP PROXY SERVER
+  include_tasks: proxy.yml
+
+- name: SETUP FIREWALL RULES
+  include_tasks: firewall.yml
