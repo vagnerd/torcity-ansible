@@ -42,6 +42,7 @@
   iptables:
     table: nat
     chain: PREROUTING
+    in_interface: ppp0
     protocol: tcp
     destination_port: 8080
     jump: DNAT
@@ -51,6 +52,7 @@
   iptables:
     table: nat
     chain: PREROUTING
+    in_interface: ppp0
     protocol: tcp
     destination_port: 53 
     jump: DNAT
@@ -60,6 +62,7 @@
   iptables:
     table: nat
     chain: PREROUTING
+    in_interface: ppp0
     protocol: udp
     destination_port: 53 
     jump: DNAT
