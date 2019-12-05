@@ -16,6 +16,7 @@
     table: nat
     chain: POSTROUTING
     out_interface: eth0
+    source: 10.0.0.0/24
     protocol: tcp
     destination_port: 443
     jump: MASQUERADE
