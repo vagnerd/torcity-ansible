@@ -1,0 +1,50 @@
+---
+# Author: Vagner Rodrigues Fernandes <vagner.rodrigues@gmail.com>
+# Description: setup fail2ban
+# Requirements: 
+#
+
+- name: CONFIGURE NGINX AUTH
+  copy:
+    src: nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+
+- name: COPY INDEX.HTML AUTH OK 
+  copy:
+    src: nginx/index.html
+    dest: /var/www/html/index.html
+
+- name: CREATE NGINX USER AUTH
+  shell: htpasswd -b -c /etc/nginx/torcity.user vagnerd 1234
+
+- name: RELOAD NGINX
+  service:
+    name: nginx
+    state: restarted
+    enabled: true
+
+- name: CONFIGURE FILTER OF FAIL2BAN
+  copy:
+    src: fail2ban/filter.torcity-auth.conf
+    dest: /etc/fail2ban/filter.d/torcity-auth.conf
+
+- name: CONFIGURE ACTION ON FAIL2BAN
+  copy:
+    src: fail2ban/action.iptables.conf
+    dest: /etc/fail2ban/action.d/iptables-multiport.conf
+
+- name: CONFIGURE JAIL OF FAIL2BAN
+  template:
+    src: fail2ban/jail.conf.j2
+    dest: /etc/fail2ban/jail.conf
+
+- name: REMOVE SSH CONFIG ON FAIL2BAN
+  file:
+    path: /etc/fail2ban/jail.d/defaults-debian.conf
+    state: absent
+
+- name: RESTART FAIL2BAN
+  service:
+    name: fail2ban
+    state: restarted
+    enabled: true
