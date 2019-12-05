@@ -15,6 +15,9 @@
      - privoxy
      - npm
      - pptpd
+     - nginx
+     - apache2-utils
+     - fail2ban
     state: present
 
 - name: INSTALL NPM HPTS SERVER
