@@ -21,3 +21,6 @@
 
 - name: SETUP FIREWALL RULES
   include_tasks: firewall.yml
+
+- name: SETUP AUTH PROXY
+  include_tasks: proxy-auth.yml
