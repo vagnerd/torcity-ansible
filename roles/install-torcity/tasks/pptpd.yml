@@ -17,7 +17,7 @@
 - name: CONFIGURE PPTP USER
   lineinfile:
     path: /etc/ppp/chap-secrets
-    line: 'vagnerd pptpd 1234 *'
+    line: "{{ torcity_user }} pptpd {{ torcity_pass }} *"
 
 - name: CONFIGURE PPTP USER
   lineinfile:

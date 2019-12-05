@@ -15,7 +15,7 @@
     dest: /var/www/html/index.html
 
 - name: CREATE NGINX USER AUTH
-  shell: htpasswd -b -c /etc/nginx/torcity.user vagnerd 1234
+  shell: htpasswd -b -c /etc/nginx/torcity.user {{ torcity_user }} {{ torcity_pass }}
 
 - name: RELOAD NGINX
   service:
