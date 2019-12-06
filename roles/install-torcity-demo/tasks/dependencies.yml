@@ -16,6 +16,7 @@
      - npm
      - fail2ban
      - nginx
+     - apache2-utils
     state: present
 
 - name: INSTALL NPM HPTS SERVER
