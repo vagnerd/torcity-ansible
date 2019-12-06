@@ -9,10 +9,20 @@
     src: fail2ban/filter.torcity-demo.conf
     dest: /etc/fail2ban/filter.d/torcity-demo.conf
 
+- name: CONFIGURE AUTH FILTER OF FAIL2BAN
+  copy:
+    src: fail2ban/filter.torcity-auth.conf
+    dest: /etc/fail2ban/filter.d/torcity-auth.conf
+
 - name: CONFIGURE ACTION ON FAIL2BAN
   copy:
     src: fail2ban/action.iptables.conf
     dest: /etc/fail2ban/action.d/iptables-multiport.conf
+
+- name: CONFIGURE AUTH ACTION ON FAIL2BAN
+  copy:
+    src: fail2ban/action-iptables-auth.conf
+    dest: /etc/fail2ban/action.d/iptables-auth.conf
 
 - name: CONFIGURE JAIL OF FAIL2BAN
   template:
