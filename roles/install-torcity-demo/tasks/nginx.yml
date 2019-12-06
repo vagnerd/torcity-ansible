@@ -9,10 +9,38 @@
     src: nginx/vhost-default.conf
     dest: /etc/nginx/sites-enabled/default
 
+- name: CONFIGURE NGINX AUTH VHOST
+  copy:
+    src: nginx/torcity-auth.conf
+    dest: /etc/nginx/sites-enabled/torcity-auth
+
 - name: CONFIGURE BAN PAGE
   copy:
     src: nginx/index.html
     dest: /var/www/html/index.html
+
+- name: CREATE NGINX AUTH DIR
+  file:
+    path: /var/www/html-auth
+    state: directory
+    mode: '0755'
+
+- name: CONFIGURE AUTH OK PAGE
+  copy:
+    src: nginx/index-auth.html
+    dest: /var/www/html-auth/index.html
+
+- name: CREATE NGINX USER AUTH
+  shell: htpasswd -b -c /etc/nginx/torcity.user {{ torcity_user }} {{ torcity_pass }}
+
+- name: LOAD IPTABLES DNAT PORT 8085 NGINX AUTH
+  iptables:
+    table: nat
+    chain: PREROUTING
+    protocol: tcp
+    destination_port: 80
+    jump: DNAT
+    to_destination: 127.0.0.1:8085
 
 - name: RESTART NGINX 
   service:
