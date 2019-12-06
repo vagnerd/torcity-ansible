@@ -25,11 +25,24 @@
     reload: yes
     state: present
 
-- name: LOAD IPTABLES DNAT PORT 8080
-  iptables:
-    table: nat
-    chain: PREROUTING
-    protocol: tcp
-    destination_port: 8080
-    jump: DNAT
-    to_destination: 127.0.0.1:15379
+- name: FIX MULTITOR LIB DIR
+  file:
+    state: directory
+    path: /var/lib/multitor
+    owner: debian-tor
+    group: debian-tor
+
+- name: STOP MULTITOR
+  shell: multitor -k
+
+- name: START MULTITOR
+  shell: multitor --init {{ tor_servers }} -u debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy
+
+#- name: LOAD IPTABLES DNAT PORT 8080
+#  iptables:
+#    table: nat
+#    chain: PREROUTING
+#    protocol: tcp
+#    destination_port: 8080
+#    jump: DNAT
+#    to_destination: 127.0.0.1:15379
