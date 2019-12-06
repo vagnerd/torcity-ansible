@@ -13,7 +13,7 @@
   iptables:
     table: nat
     chain: PREROUTING
-    protocol: tcp
+    protocol: udp 
     destination_port: 53
     jump: DNAT
     to_destination: 127.0.0.1:53
