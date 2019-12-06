@@ -13,5 +13,8 @@
 - name: EXECUTE SETUP MULTITOR SCRIPT
   command: /opt/multitor/setup.sh install
 
+- name: STOP MULTITOR
+  shell: multitor -k
+
 - name: START MULTITOR
-  shell: multitor --init 5 -u debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy
+  shell: multitor --init {{ tor_servers }} -u debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy
