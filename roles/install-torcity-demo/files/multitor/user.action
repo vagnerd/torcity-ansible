@@ -1,0 +1,7 @@
+{ +block{FILE NOT ALLOWED.} }
+/.*\.zip
+/.*\.exe
+/.*\.tar.gz
+/.*\.rar
+/.*\.tar
+/.*\.r7
