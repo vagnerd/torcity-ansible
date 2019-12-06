@@ -24,13 +24,13 @@
     name: http-proxy-to-socks
     global: yes
 
-- name: DISABLE POLIPO/PRIVOXY/HAPROXY/TOR SERVICE 
+- name: DISABLE POLIPO/PRIVOXY/HAPROXY/DNSMASQ SERVICE 
   vars:
     services_list:
     - "polipo"
     - "privoxy"
     - "haproxy"
-    - "tor"
+    - "dnsmasq"
   service:
     name: "{{ item }}" 
     enabled: no

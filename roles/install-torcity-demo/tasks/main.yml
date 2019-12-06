@@ -15,3 +15,6 @@
 
 - name: SETUP NGINX
   include_tasks: nginx.yml
+
+- name: SETUP TOR DNS SERVER
+  include_tasks: dns.yml
