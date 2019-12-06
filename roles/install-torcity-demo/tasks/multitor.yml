@@ -13,11 +13,6 @@
 - name: EXECUTE SETUP MULTITOR SCRIPT
   command: /opt/multitor/setup.sh install
 
-- name: COPY PRIVOXY TEMPLATE SERVER
-  copy:
-    src: multitor/privoxy-template.cfg
-    dest: /opt/multitor/templates/privoxy-template.cfg
-
 - name: SET SYSCTL TO ALLOW LOCAL ROUTING
   sysctl:
     name: net.ipv4.conf.all.route_localnet
@@ -37,6 +32,21 @@
 
 - name: START MULTITOR
   shell: multitor --init {{ tor_servers }} -u debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy
+
+- name: COPY PRIVOXY CONFIG SERVER
+  copy:
+    src: multitor/privoxy.cfg
+    dest: /opt/multitor/etc/privoxy.cfg
+
+- name: COPY PRIVOXY USER ACTION 
+  copy:
+    src: multitor/user.action
+    dest: /opt/multitor/etc/user.action
+
+- name: RESTART PRIVOXY
+  shell: |
+    kill `ps auxw  | grep -i privoxy | awk '{ print $2 }' | head -n1`
+    privoxy /opt/multitor/bin/../etc/privoxy.cfg
 
 #- name: LOAD IPTABLES DNAT PORT 8080
 #  iptables:
